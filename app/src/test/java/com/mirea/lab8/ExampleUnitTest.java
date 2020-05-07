@@ -1,4 +1,4 @@
-package com.example.lab_eight;
+package com.mirea.lab8;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.lab_eight;
+package com.mirea.lab8;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.lab_eight", appContext.getPackageName());
+        assertEquals("com.mirea.lab8", appContext.getPackageName());
     }
 }
