@@ -43,7 +43,7 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
     private ArrayList<String> placesList = new ArrayList<>();
 
     private ListView listView;
-
+   private  ListView listView1;
     private GoogleMap map;
     private GeocodingAPI geocodingApi;
 
@@ -57,12 +57,15 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private OnFragmentDataListener mListener;
+    private OnFragmentDataListener MListener;
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentDataListener) {
             mListener = (OnFragmentDataListener) context;
+            MListener = (OnFragmentDataListener) context;
         } else {
             throw new RuntimeException(context.toString());
         }
@@ -101,9 +104,9 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
 
         final EditText editText = view.findViewById(R.id.edit_text);
         Button button = view.findViewById(R.id.button);
-
+    Button button1=view.findViewById(R.id.button1);
         listView = view.findViewById(R.id.list);
-
+listView1=view.findViewById(R.id.list1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +133,7 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
     }
 
     static String getTitle(int position) {
-        return position == Constants.PAGE_FROM ? "FROM" : "TO";
+        return "FROM<->TO";
     }
 
     private class ProcessTask extends AsyncTask<Void, Void, Void> {
