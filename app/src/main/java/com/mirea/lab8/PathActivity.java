@@ -48,10 +48,10 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         Bundle arguments = getIntent().getExtras();
-        lat1 = arguments.getDouble(Constants.LAT1_KEY);
-        lng1 = arguments.getDouble(Constants.LNG1_KEY);
-        lat2 = arguments.getDouble(Constants.LAT2_KEY);
-        lng2 = arguments.getDouble(Constants.LNG2_KEY);
+        lat1 = arguments.getDouble("LAT1");
+        lng1 = arguments.getDouble("LNG1");
+        lat2 = arguments.getDouble("LAT2");
+        lng2 = arguments.getDouble("LNG2");
 
         places.add(new LatLng(lat1, lng1));
         places.add(new LatLng(lat2, lng2));
@@ -69,17 +69,17 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl("https://maps.googleapis.com/maps/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         DirectionsAPI directionsApi = retrofit.create(DirectionsAPI.class);
         Call<RouteResponse> routeResponseCall = directionsApi.getRoute(lat1 + "," + lng1,
-                                                                    lat2 + "," + lng2, Constants.MAPS_KEY);
+                                                                    lat2 + "," + lng2, "AIzaSyAI4nxhTP5r6zfpS5cgEJ63k4uNw3wzaDs");
 
         routeResponseCall.enqueue(new Callback<RouteResponse>() {
             @Override
             public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response) {
-                if (response.body().status.equals(Constants.STATUS_OK)) {
+                if (response.body().status.equals("OK")) {
                     List<LatLng> mPoints = PolyUtil.decode(response.body().getPoints());
 
                     PolylineOptions line = new PolylineOptions();

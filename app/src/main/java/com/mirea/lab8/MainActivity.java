@@ -98,12 +98,12 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
     public void onShowPathClick(View view) {
         if (lat1 != 0.0 && lng1 != 0.0 && lat2 != 0.0 && lng2 != 0.0) {
             Intent intent = new Intent(this, PathActivity.class);
-            intent.putExtra(Constants.LAT1_KEY, lat1);
-            intent.putExtra(Constants.LNG1_KEY, lng1);
-            intent.putExtra(Constants.LAT2_KEY, lat2);
-            intent.putExtra(Constants.LNG2_KEY, lng2);
-            intent.putExtra(Constants.MY_POSITION_LAT_KEY, myPositionLat);
-            intent.putExtra(Constants.MY_POSITION_LNG_KEY, myPositionLng);
+            intent.putExtra("LAT1", lat1);
+            intent.putExtra("LNG1", lng1);
+            intent.putExtra("LAT2", lat2);
+            intent.putExtra("LNG2", lng2);
+            intent.putExtra("MY_POSITION_LAT", myPositionLat);
+            intent.putExtra("MY_POSITION_LNG", myPositionLng);
             startActivity(intent);
         }
         else Toast.makeText(getApplicationContext(),"Введите все точки",Toast.LENGTH_LONG).show();

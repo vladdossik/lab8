@@ -75,7 +75,7 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
     public static PageFragment newInstance(int page) {
         PageFragment fragment = new PageFragment();
         Bundle args = new Bundle();
-        args.putInt(Constants.PAGE_KEY, page);
+        args.putInt("NUMBER", page);
 
         fragment.setArguments(args);
         return fragment;
@@ -84,7 +84,7 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageNumber = getArguments() != null ? getArguments().getInt(Constants.PAGE_KEY) : 0;
+        pageNumber = getArguments() != null ? getArguments().getInt("NUMBER") : 0;
     }
 
     @Nullable
@@ -98,7 +98,7 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl("https://maps.googleapis.com/maps/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         geocodingApi = retrofit.create(GeocodingAPI.class);
@@ -168,7 +168,7 @@ listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-                response = geocodingApi.getAddress(input, Constants.MAPS_KEY).execute();
+                response = geocodingApi.getAddress(input, "AIzaSyAI4nxhTP5r6zfpS5cgEJ63k4uNw3wzaDs").execute();
             } catch (IOException ex) {
                 Log.e(TAG, "" + ex.getMessage());
             }
@@ -200,7 +200,7 @@ listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
-                response = geocodingApi.getAddress(input, Constants.MAPS_KEY).execute();
+                response = geocodingApi.getAddress(input, "AIzaSyAI4nxhTP5r6zfpS5cgEJ63k4uNw3wzaDs").execute();
             } catch (IOException ex) {
                 Log.e(TAG, "" + ex.getMessage());
             }
