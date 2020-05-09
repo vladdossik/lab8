@@ -54,6 +54,7 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
 
     public interface OnFragmentDataListener {
         void onFragmentDataListener(Double lat, Double lng);
+        void onFragmentDataListenr(Double lat,Double lng);
     }
 
     private OnFragmentDataListener mListener;
@@ -103,10 +104,11 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
         geocodingApi = retrofit.create(GeocodingAPI.class);
 
         final EditText editText = view.findViewById(R.id.edit_text);
+        final EditText editText1=view.findViewById(R.id.edit_text1);
         Button button = view.findViewById(R.id.button);
-    Button button1=view.findViewById(R.id.button1);
+      Button button1=view.findViewById(R.id.button1);
         listView = view.findViewById(R.id.list);
-listView1=view.findViewById(R.id.list1);
+       listView1=view.findViewById(R.id.list1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +118,16 @@ listView1=view.findViewById(R.id.list1);
                     new ProcessTask(inputAddress).execute();
                 }
 
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inputAddress = editText1.getText().toString();
+
+                if (inputAddress.length() != 0 ) {
+                    new ProcesTask(inputAddress).execute();
+                }
             }
         });
 
@@ -129,7 +141,16 @@ listView1=view.findViewById(R.id.list1);
                 Toast.makeText(getContext(),"Added",Toast.LENGTH_LONG).show();
             }
         });
-
+listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String place = placesList.get(position);
+        Double lat = placeWithCoords.get(place).get(0);
+        Double lng = placeWithCoords.get(place).get(1);
+        MListener.onFragmentDataListenr(lat, lng);
+        Toast.makeText(getContext(),"Added",Toast.LENGTH_LONG).show();
+    }
+});
     }
 
     static String getTitle(int position) {
@@ -166,6 +187,38 @@ listView1=view.findViewById(R.id.list1);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                     android.R.layout.simple_list_item_1, placesList);
             listView.setAdapter(adapter);
+        }
+    }
+    private class ProcesTask extends AsyncTask<Void, Void, Void> {
+        private String input;
+        private Response<GeocodingResponse> response;
+
+        public ProcesTask(String str) {
+            input = str;
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            try {
+                response = geocodingApi.getAddress(input, Constants.MAPS_KEY).execute();
+            } catch (IOException ex) {
+                Log.e(TAG, "" + ex.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            placesList.clear();
+            for (Address i : response.body().addressList) {
+                Double lat = i.geometry.coordinate.lat;
+                Double lng = i.geometry.coordinate.lng;
+                placeWithCoords.put(i.address, new ArrayList<>(Arrays.asList(lat, lng)));
+                placesList.add(i.address);
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                    android.R.layout.simple_list_item_1, placesList);
+            listView1.setAdapter(adapter);
         }
     }
 }

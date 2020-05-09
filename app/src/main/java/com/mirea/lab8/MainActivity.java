@@ -42,16 +42,14 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
 
     @Override
     public void onFragmentDataListener(Double lat, Double lng) {
-        if (pager.getCurrentItem() == Constants.PAGE_FROM) {
             lat1 = lat;
             lng1 = lng;
-        }
-        if (pager.getCurrentItem() == Constants.PAGE_TO) {
-            lat2 = lat;
-            lng2 = lng;
-        }
     }
-
+    @Override
+    public void onFragmentDataListenr(Double lat, Double lng) {
+        lat2 = lat;
+        lng2 = lng;
+    }
     private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
