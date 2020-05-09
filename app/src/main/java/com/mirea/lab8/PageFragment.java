@@ -127,12 +127,8 @@ public class PageFragment extends Fragment implements OnMapReadyCallback {
                 String place = placesList.get(position);
                 Double lat = placeWithCoords.get(place).get(0);
                 Double lng = placeWithCoords.get(place).get(1);
-
                 mListener.onFragmentDataListener(lat, lng);
-
-                LatLng marker = new LatLng(lat, lng);
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 15));
-                map.addMarker(new MarkerOptions().title("You here!").position(marker));
+                Toast.makeText(getContext(),"Added",Toast.LENGTH_LONG).show();
             }
         });
 
