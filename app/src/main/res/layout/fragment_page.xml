@@ -17,7 +17,7 @@
         <EditText
             android:id="@+id/edit_text"
             android:layout_width="240dp"
-            android:layout_height="wrap_content"
+                    android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:hint="Введите начало.."
             android:importantForAutofill="no"

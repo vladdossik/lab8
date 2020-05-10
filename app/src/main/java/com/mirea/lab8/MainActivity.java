@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity implements PageFragment.OnFragmentDataListener {
     private ViewPager pager;
-
     private Double lat1 = 0.0;
     private Double lng1 = 0.0;
     private Double lat2 = 0.0;
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
     private Double myPositionLat;
     private Double myPositionLng;
     private boolean flag;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
