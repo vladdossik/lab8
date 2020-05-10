@@ -31,13 +31,10 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getLocationPermission();
-
         pager = findViewById(R.id.pager);
         pager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
     }
-
     @Override
     public void onFragmentDataListener(Double lat, Double lng) {
             lat1 = lat;
