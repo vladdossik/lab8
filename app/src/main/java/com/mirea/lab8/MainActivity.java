@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
                     1);
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         flag = false;
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
             }
         }
     }
-
     private void setGpsLocation() {
         try {
             if (flag) {
@@ -89,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
             Log.e("Exception: ", e.getMessage());
         }
     }
-
     public void onShowPathClick(View view) {
         if (lat1 != 0.0 && lng1 != 0.0 && lat2 != 0.0 && lng2 != 0.0) {
             Intent intent = new Intent(this, PathActivity.class);
@@ -102,7 +99,5 @@ public class MainActivity extends AppCompatActivity implements PageFragment.OnFr
             startActivity(intent);
         }
         else Toast.makeText(getApplicationContext(),"Введите все точки",Toast.LENGTH_LONG).show();
-        
-
     }
 }
