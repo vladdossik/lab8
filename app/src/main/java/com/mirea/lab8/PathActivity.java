@@ -78,7 +78,7 @@ public class PathActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         routeResponseCall.enqueue(new Callback<RouteResponse>() {
             @Override
-            public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response) {
+            public void onResponse(Call<RouteResponse> call, Response   <RouteResponse> response) {
                 if (response.body().status.equals("OK")) {
                     List<LatLng> mPoints = PolyUtil.decode(response.body().getPoints());
 

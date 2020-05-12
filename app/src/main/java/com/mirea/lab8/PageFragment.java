@@ -210,6 +210,7 @@ listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         protected void onPostExecute(Void result) {
             placesList.clear();
+            assert response.body() != null;
             for (Address i : response.body().addressList) {
                 Double lat = i.geometry.coordinate.lat;
                 Double lng = i.geometry.coordinate.lng;
